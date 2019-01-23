@@ -1,10 +1,10 @@
 2017-12-15  
 1.先将文件“BaiduPlusGoogle.html”下载到如“d:”根目录下。  
 2.按照设置方式设置，实例中为chrome中的设置方法。  
-![image](https://github.com/edwinchang/BaiduPlusGoogle/blob/master/images/step1.jpg)  
 第一步  
-![image](https://github.com/edwinchang/BaiduPlusGoogle/blob/master/images/step2.jpg)  
+![image](https://github.com/edwinchang/BaiduPlusGoogle/blob/master/images/step1.jpg)  
 第二步  
+![image](https://github.com/edwinchang/BaiduPlusGoogle/blob/master/images/step2.jpg)  
 3.在浏览器搜索栏中搜索关键词，就可以使用当前搜索引擎了。  
+最终效果  
 ![image](https://github.com/edwinchang/BaiduPlusGoogle/blob/master/images/final.jpg)  
-最终效果
