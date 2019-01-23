@@ -1,0 +1,408 @@
+<!Doctype html>
+<html xmlns=http://www.w3.org/1999/xhtml lang="zh-CN">
+<head>
+    <meta http-equiv=Content-Type content="text/html";charset="utf-8"> <!--;charset="utf-8"-->
+    <title>BaiduPlusGoogle.html</title>
+    <meta name="description" content="集成主流搜索引擎，化繁为简立刻找到你想要的！" />
+    <meta name="keywords" content="单搜，双搜，多搜，三搜，四搜，全搜，一起搜，集成搜索，超级搜索，集合搜索，综合搜索，万能搜索，百度谷歌一起搜，百度+谷歌，搜索引擎集合，全能搜索" />
+
+<!--************************************搜索引擎地址设置******************************
+https://www.google.com/?gws_rd=ssl
+谷歌镜像大全列表：
+http://ac.scmor.com/    （提供网速测试）
+https://coderschool.cn/1853.html
+http://gufenso.coderschool.cn/
+https://google.jiongjun.cc/
+https://weibo.com/ttarticle/p/show?id=2309404043918147773050
+https://lai.yuweining.cn/archives/578/
+https://lai.yuweining.cn/archives/107/
+https://iazuresky.com/195.html
+https://chenjx.cn/google-mirrors/
+https://liyuans.com/archives/google-mirror.html
+http://blog.sciencenet.cn/blog-752541-817729.html
+镜像列表：
+安全搜索的实例：
+https://d.ggkai.men/search?safe=strict&q={keyword}
+---其它---
+https://www.zhihu.com/search?type=content&q={keyword}
+-->
+
+<script language="JavaScript" type="text/javascript">
+var Url1Row,Url2Row,QueryString,Url1,Url2,UrlNetdisc;
+Url1Row= "https://www.baidu.com/s?wd={keyword}&rn=20";
+//Url2Row= "https://d.ggkai.men/search?q={keyword}";
+var keywordVal;
+var isOnload=0;
+
+var tim = 1;
+setInterval("tim++", 10);
+var b = 1;
+var arrUrlGoogleEngineRow = new Array();
+var arrConnectTime = new Array();
+var quickgurl=-1;
+//---谷歌镜像引擎---
+var arrUrlGoogleEngineRow=new Array();
+//arrUrlGoogleEngineRow[0]="https://www.google.com/search?q={keyword}";
+//arrUrlGoogleEngineRow[1]="https://quick.likeso.ml/search?q={keyword}";
+//arrUrlGoogleEngineRow[2]="https://rain.likeso.ml/search?q={keyword}";
+//arrUrlGoogleEngineRow[3]="https://plus.likeso.ml/search?q={keyword}";
+//arrUrlGoogleEngineRow[4]="https://g.codery.ga/search?q={keyword}";
+//arrUrlGoogleEngineRow[5]="https://coderschool.2345.ga/search?q={keyword}";
+//arrUrlGoogleEngineRow[6]="https://d.ggkai.men/search?q={keyword}";
+//arrUrlGoogleEngineRow[7]="https://g.gugugege.pw/search?q={keyword}";
+//arrUrlGoogleEngineRow[8]="http://avol.club/search?q={keyword}";
+//arrUrlGoogleEngineRow[9]="https://z2.scmorcom.top/search?q={keyword}";
+//arrUrlGoogleEngineRow[10]="https://scmor.ilxc.cc/search?q={keyword}";
+//arrUrlGoogleEngineRow[11]="http://google.wxlar.com/search?q={keyword}&lr=lang_zh-CN&inlang=zh-CN&newwindow=1&hl=zh-CN&ie=UTF-8";
+//arrUrlGoogleEngineRow[12]="https://google45.azurewebsites.net/search?q={keyword}";
+//arrUrlGoogleEngineRow[13]="https://googleone.azurewebsites.net/search?q={keyword}";
+//arrUrlGoogleEngineRow[14]="https://google98.azurewebsites.net/search?q={keyword}";
+//arrUrlGoogleEngineRow[15]="https://google987.azurewebsites.net/search?q={keyword}";
+//arrUrlGoogleEngineRow[16]="https://vip.gg.vir5.net/search?q={keyword}";
+//arrUrlGoogleEngineRow[17]="https://x.segmentfualt.com/search?q={keyword}";
+//arrUrlGoogleEngineRow[18]="https://vip.gg.vir5.net/search?q={keyword}";
+//arrUrlGoogleEngineRow[19]="http://cd.sousuodao.top/search?q={keyword}";
+//---非原版---
+arrUrlGoogleEngineRow[20]="https://suche.web.de/web/result?q={keyword}&page=1";
+arrUrlGoogleEngineRow[21]="http://bird.so/search?q={keyword}";
+//arrUrlGoogleEngineRow[22]="http://www.tmeishi.com/simple/inn.php?leix=search&tbm=isch&newwindow=1&q={keyword}&tbm=&lr=&zj=ip&cr=&hl=zh-CN";
+
+//---网盘搜索引擎---
+var arrUrlNetdiscEngineRow=new Array();
+arrUrlNetdiscEngineRow[6]="https://www.google.com/search?q={keyword}";   //谷歌（官网）
+arrUrlNetdiscEngineRow[7]="https://wenku.baidu.com/search?word={keyword}";   //百度文库
+arrUrlNetdiscEngineRow[9]="http://www.panduoduo.net/s/name/{keyword}";   //盘多多
+arrUrlNetdiscEngineRow[12]="http://www.quzhuanpan.com/source/search.action?q={keyword}";  //去转盘
+arrUrlNetdiscEngineRow[15]="http://www.pansou.com/?q={keyword}";  //盘搜
+arrUrlNetdiscEngineRow[16]="http://pan.here325.com/s?q={keyword}";  //325
+arrUrlNetdiscEngineRow[18]="http://www.daysou.com/s?q={keyword}"; //天天搜
+arrUrlNetdiscEngineRow[21]="http://www.xilinjie.com/s?q={keyword}";   //西林街
+arrUrlNetdiscEngineRow[24]="http://www.panc.cc/s/{keyword}/td_0"; //胖次
+arrUrlNetdiscEngineRow[27]="https://wangpan007.com/share/kw{keyword}";    //网盘007
+arrUrlNetdiscEngineRow[33]="http://www.13910.com/s/?kw={keyword}";   //盘找找
+arrUrlNetdiscEngineRow[36]="http://www.tuoniao.me/search/{keyword}/list";   //鸵鸟
+arrUrlNetdiscEngineRow[39]="http://wangpan.renrensousuo.com/jieguo/?sa=%E7%BD%91%E7%9B%98%E6%90%9C%E7%B4%A2&q={keyword}";   //众人
+arrUrlNetdiscEngineRow[42]="https://pan.sov5.cn/search?q={keyword}";   //SoV5
+arrUrlNetdiscEngineRow[45]="http://www.sobaidupan.com/";    //白度 //http://www.sobaidupan.com/search.asp?wd={keyword}&so_md5key=5ac49034698d4fb629d08a442e831549
+arrUrlNetdiscEngineRow[48]="http://www.tebaidu.com/";  //特百度    //http://www.tebaidu.com/search.asp?wd={keyword}&so_md5key=7634bef6bb69df2680e19dad8144b424
+arrUrlNetdiscEngineRow[51]="http://www.wowenda.com/";  //网盘之家  //http://www.wowenda.com/search?wd={keyword}&so_md5key=5ac49034698d4fb629d08a442e831549
+arrUrlNetdiscEngineRow[54]="https://www.lingfengyun.com/";  //凌风云  //https://www.lingfengyun.com/search?wd={keyword}&so_md5key=5ac49034698d4fb629d08a442e831549
+//---其它搜索---
+arrUrlNetdiscEngineRow[70]="http://s.99down.com/?q={keyword}";  //99down
+arrUrlNetdiscEngineRow[73]="http://www.iplaysoft.com/search/?s=548512288484505211&q={keyword}";  //异次元
+arrUrlNetdiscEngineRow[76]="http://www.xdowns.com/index.php?ac=search&keyword={keyword}";  //xdowns
+//arrUrlNetdiscEngineRow[79]="{keyword}";
+//**********************************************************************************
+function StartGUrl(c) {
+    var gUrl,st,urldomain,et,surl,i;
+    for (i = 0; i <= arrUrlGoogleEngineRow.length-1; i++) {
+        arrConnectTime[i] = 0;
+
+        //alert("i="+i+" arrUrlGoogleEngineRow[i]="+arrUrlGoogleEngineRow[i]);
+        if(arrUrlGoogleEngineRow[i]=="undefined"||arrUrlGoogleEngineRow[i]==null||arrUrlGoogleEngineRow[i]==""){continue;}
+
+		gUrl = arrUrlGoogleEngineRow[i];
+		//alert("i="+i+" gUrl="+gUrl);
+		st = gUrl.indexOf("//",1);
+		urldomain = gUrl.substring(st+1, gUrl.length) ;
+		et = urldomain.indexOf("/",1);
+		surl = gUrl.substring(0,et+st+2);
+		//alert("surl="+surl);
+		//一定会装载图片失败，就看哪个url返回失败的信息快，就表示这个url连接速度快
+        document.write('<img style="display:none" src="' + surl + '#g' + Math.ceil(Math.random() * 10000) + '.gif" onerror="checkgurl(' + i + ')" \/>')
+    }
+}
+
+function checkgurl(arrNum) {
+    var conTime,tt;
+    conTime = tim / 100;
+    //alert("conTime="+conTime);
+    tt = conTime.toString().split('.');
+    if(tt.length==1) conTime = conTime.toString() + '.00';
+    else if(tt[1].length < 2)  conTime = conTime.toString() + '0';
+    if (conTime > 4){ //超过4秒，连接超时
+        //nothing
+    }
+    else{   //连接成功
+        arrConnectTime[arrNum]=conTime;
+        //alert("quickgurl="+quickgurl);
+        if(quickgurl==-1){
+            quickgurl=arrNum;
+            //alert("arrNum="+arrNum);
+            initMeSide();
+            return;
+        }
+    }
+}
+
+//获取Array中的实际数量
+function GetArrayNum(myArr){
+    var j=0;
+    for (var i = 0; i <= myArr.length - 1; i++) {
+        if(myArr[i]!=null && myArr[i]!=""){j++;}
+    }
+    return j;
+}
+
+//sArgName表示要获取哪个参数的值
+function GetArgsFromHref(sArgName)
+{
+    var sHref = window.location.href //测试数据，实际情况是用window.location.href得到URL
+    //alert(sHref);
+　　var args = sHref.split("?");
+　　var retval = "";
+　　if(args[0] == sHref) /*参数为空*/
+　　{
+　　    return retval; /*无需做任何处理*/
+　　}
+　　var str = args[1];
+　　args = str.split("&");
+　　for(var i = 0; i < args.length; i++ )
+　　{
+　　    str = args[i];
+　　    var arg = str.split("=");
+　　    if(arg.length <= 1) continue;
+　　    if(arg[0] == sArgName) retval = arg[1];
+　　}
+　　return retval;
+    //alert(retval);
+}
+//其它获取参数方式
+//String.prototype.getParameter = function (key) {
+//        var re = new RegExp(key + '=([^&]*)(?:&)?');
+//        return this.match(re) && this.match(re)[1];
+//    };
+//    $(function () {
+//        // 获取url值
+//        var s = location.href;
+//        // 获取编号
+//        var id = s.getParameter("id");
+//})
+
+function SetMainUrl()
+{
+    //Document.domain="google.com";
+    //var sonWindow = document.getElementById('rFrame').contentWindow;
+
+    //获取当前页面中的关键词框中内容，如果关键词为空则从url中获取参数，否则通过关键词框内容进行搜索
+    keywordVal=document.getElementById("kw").value;
+    //alert(keywordVal);
+    if (keywordVal==null||keywordVal==""){
+        QueryString=GetArgsFromHref("q");
+        Url1=Url1Row.replace("{keyword}",QueryString);
+        //Url2=Url2Row.replace("{keyword}",QueryString);
+    }
+    else{
+        Url1=Url1Row.replace("{keyword}",encodeURI(keywordVal));
+        //Url2=Url2Row.replace("{keyword}",keywordVal);
+        //Url2=Url2Row.replace("{keyword}",encodeURI(keywordVal));
+        //alert(Url2);
+    }
+
+    //parent.document.getElementById("lFrame").src=Url1;//"http://w3school.com.cn";
+    //parent.document.getElementById("rFrame").src=Url2;//"http://w3school.com.cn";
+    document.getElementById("lFrame").src=Url1;//"http://w3school.com.cn";
+    //document.getElementById("rFrame").src=Url2;//"http://w3school.com.cn";
+    //windows.open(document.all.ifrmname.src,'rFrame','')
+    //alert(document.getElementById("myFrameSet"));
+}
+
+function SetSideUrl()
+{
+    //Document.domain="google.com";
+    //var sonWindow = document.getElementById('rFrame').contentWindow;
+
+    //alert("SetSideUrl");
+    //获取当前页面中的关键词框中内容，如果关键词为空则从url中获取参数，否则通过关键词框内容进行搜索
+    keywordVal=document.getElementById("kw").value;
+    //alert(keywordVal);
+    if (keywordVal==null||keywordVal==""){
+        QueryString=GetArgsFromHref("q");
+        //Url1=Url1Row.replace("{keyword}",QueryString);
+        Url2=Url2Row.replace("{keyword}",QueryString);
+    }
+    else{
+        //Url1=Url1Row.replace("{keyword}",encodeURI(keywordVal));
+        //Url2=Url2Row.replace("{keyword}",keywordVal);
+        Url2=Url2Row.replace("{keyword}",encodeURI(keywordVal));
+    }
+
+    //alert("quickgurl="+quickgurl);
+    //alert(Url2);
+    //parent.document.getElementById("lFrame").src=Url1;//"http://w3school.com.cn";
+    //parent.document.getElementById("rFrame").src=Url2;//"http://w3school.com.cn";
+    //document.getElementById("lFrame").src=Url1;//"http://w3school.com.cn";
+    document.getElementById("rFrame").src=Url2;//"http://w3school.com.cn";
+    //windows.open(document.all.ifrmname.src,'rFrame','')
+    //alert(document.getElementById("myFrameSet"));
+    //alert("document.getElementById('rFrame').src="+document.getElementById("rFrame").src);
+}
+
+function setNetdiscUrl(engineNum,openType)
+{
+        //获取当前页面中的关键词框中内容，如果关键词为空则从url中获取参数，否则通过关键词框内容进行搜索
+        keywordVal=document.getElementById("kw").value;
+        //alert(engineNum);
+        if (keywordVal==null||keywordVal==""){
+            QueryString=GetArgsFromHref("q");
+            UrlNetdisc=arrUrlNetdiscEngineRow[engineNum].replace("{keyword}",QueryString);
+            //alert(UrlNetdisc);
+        }
+        else{
+            UrlNetdisc=arrUrlNetdiscEngineRow[engineNum].replace("{keyword}",encodeURI(keywordVal));
+        }
+
+        //alert(UrlNetdisc);
+        if(openType==1){
+            document.getElementById("rFrame").src=UrlNetdisc;//"http://w3school.com.cn";
+            //alert("rframe_src="+document.getElementById("rFrame").src);
+            document.getElementById("rFrame").location.reload();
+        }
+        else
+        {
+            window.open(UrlNetdisc);
+            //window.open("http://www.google.com/search?hl=zh-CN&q="+encodeURI(sValue));
+        }
+}
+
+//function getSrc(){
+//    alert(document.getElementById("rFrame").src);
+//}
+
+function SetAllUrl()
+{
+    SetMainUrl();
+    SetSideUrl();
+}
+
+function FitMainIFrame(){
+    document.getElementById("lFrame").height=document.documentElement.clientHeight;
+    //document.getElementById("rFrame").height=document.documentElement.clientHeight;
+}
+
+function FitSideIFrame(){
+    //document.getElementById("lFrame").height=document.documentElement.clientHeight;
+    document.getElementById("rFrame").height=document.documentElement.clientHeight;
+}
+
+function keyLogin(){
+    //alert(111);
+    if(event.keyCode==13)  //回车键的键值为13
+    {
+        //alert(document.getElementById("search"));
+        document.getElementById("search").click(); //调用登录按钮的登录事件
+    }
+}
+
+function initMeMain(){
+    if(isOnload==0){
+        SetMainUrl();
+        FitMainIFrame();
+        document.getElementById("kw").value=decodeURI(QueryString);
+
+        isOnload=1;
+    }
+}
+
+function initMeSide(){
+    //开始进行所有谷歌镜像速度测试
+    //alert("initMeSide");
+    //sleep(5000);
+    //StartGUrl();
+    //alert("quickgurl="+quickgurl);
+    Url2Row= arrUrlGoogleEngineRow[quickgurl];
+    //alert("Url2Row="+Url2Row);
+    SetSideUrl();
+    FitSideIFrame();
+}
+
+function sleep(d){
+  for(var t = Date.now();Date.now() - t <= d;);
+}
+
+function testMe(){
+    initMeSide();
+    document.getElementById("rFrame").src="https://www.baidu.com";
+    //document.getElementById("rFrame").location.reload();
+}
+
+//window.onload = function(){
+//	if(document.form.keyword.value==''){
+//        document.form.keyword.focus();
+//    }
+//}
+</script>
+</head>
+
+<body onkeydown="keyLogin()">
+<!--<body onload="initMe()" onkeydown="keyLogin()">-->
+<!--<form action="" method="" id="form" name="form" target=_parent>-->
+<div>
+<a href="" target="_parent">BaiPlusGoogle</a>
+<input size="20" id="kw" name="keyword" type="text" value=""/>
+<select name="num" id="num" style="width:50px">
+    <option value="10" >每页10条</option>
+	<option value="20" selected>每页20条</option>
+	<option value="50" >每页50条</option>
+	<option value="100" >每页100条</option>
+</select> 左侧
+<select name="one" style="width:52px">
+    <option value="baidu"selected>百度</option>
+    <option value="google">谷歌</option>
+    <option value="sogou">搜狗</option>
+    <option value="so">360</option>
+    <option value="bing">必应</option>
+    <option value="sm">神马</option>
+    <option value="aol">aol</option>
+    <option value="taobao">淘宝</option>
+    <option value="jd">京东</option>
+    <option value="mini">自定</option>
+</select> 右侧
+    <select name="two" style="width:52px">
+    <option value="baidu">百度</option>
+    <option value="google"selected>谷歌</option>
+    <option value="sogou">搜狗</option>
+    <option value="so">360</option>
+    <option value="bing">必应</option>
+    <option value="sm">神马</option>
+    <option value="aol">aol</option>
+    <option value="taobao">淘宝</option>
+    <option value="jd">京东</option>
+    <option value="mini">自定</option>
+</select>
+<input name="three" type="hidden" value="sogou"/>
+<input name="four" type="hidden" value="so"/>
+<input id="search" value="搜索" type="submit" onclick="SetAllUrl()"/>
+网盘:
+<!--<a href="" target="_parent">BPG</a>-->
+<!--<a id="" href="#" target="_self" onclick="testMe()">testMe</a>-->
+<input id="" type="submit" onclick="setNetdiscUrl(6,2)" value="谷歌↗"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(7,1)" value="百度文库"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(9,2)" value="盘多↗"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(12,1)" value="转盘"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(15,1)" value="盘搜"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(16,1)" value="325"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(18,1)" value="天天"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(21,1)" value="西林"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(24,1)" value="胖次"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(27,1)" value="007"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(33,1)" value="盘找"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(36,1)" value="鸵鸟"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(39,1)" value="众人"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(42,1)" value="SoV5"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(45,2)" value="白度↗" ></a>
+<input id="" type="submit" onclick="setNetdiscUrl(48,2)" value="特百↗"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(51,2)" value="盘家↗"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(54,2)" value="凌风↗"></a>
+软件:
+<input id="" type="submit" onclick="setNetdiscUrl(70,1)" value="99D"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(73,1)" value="异次"></a>
+<input id="" type="submit" onclick="setNetdiscUrl(76,2)" value="绿盟↗"></a>
+</div>
+<iframe onload="initMeMain()" src="" id="lFrame" height="100%" width="49.6%" border="0" frameborder="0" target="_blank"></iframe>
+<iframe onload="" src="" id="rFrame" height="100%" width="49.6%" border="0" frameborder="0" target="_blank"></iframe><!--target="_parent"-->
+<!--<iframe src="about:blank" id="hiddenFrame" height="50%" width="49.6%" border="0" frameborder="0">-->
+<div style="display:none;"><script type="text/javascript">StartGUrl();</script></div>
+</body>
+</html>
+
